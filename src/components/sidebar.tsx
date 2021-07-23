@@ -10,7 +10,6 @@ interface Props {
 
 function Sidebar({ isOpen }: Props): ReactElement {
 	const { pathname } = useLocation();
-	console.log('router', pathname);
 
 	return (
 		<Stack

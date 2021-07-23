@@ -77,7 +77,7 @@ const Contacts = (props: Props) => {
 			<HStack>
 				<InputGroup>
 					<InputLeftElement ps="3">
-						<SearchIcon color="gray.300" />
+						<SearchIcon color="#9B9B9B" />
 					</InputLeftElement>
 					<Input
 						value={query}

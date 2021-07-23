@@ -12,7 +12,7 @@ const Layout = ({ children }: Props) => {
 	const handleToggle = () => (isOpen ? onClose() : onOpen());
 
 	return (
-		<Box bg="#F6F7F8">
+		<Box bg="#F6F7F8" height="100vh">
 			<Sidebar isOpen={isOpen} />
 			<Header isOpen={isOpen} handleToggle={handleToggle} />
 			<Box p="3" marginStart={isOpen ? '250px' : '0'}>

@@ -14,8 +14,6 @@ const lists: any = {
   contribution: contributions,
 }
 
-
-
 export const random = (type: string): string | number => {
   const randomItem = Math.floor(Math.random() * lists[type].length)
   return lists[type][randomItem]
@@ -35,7 +33,7 @@ export const formatContact = (e: any) => {
   );
   const contact = {
     name: `${firstName} ${lastName}`,
-    job: 'zion resident',
+    job: random('job'),
     email,
     gender: gender.value,
     contribution,

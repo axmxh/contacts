@@ -128,7 +128,7 @@ const ContactForm = ({
 					Is Active
 				</Checkbox>
 			</HStack>
-			<HStack mt="3" justifyContent="flex-end">
+			<HStack my="3" justifyContent="flex-end">
 				<Button variant="outline" mr={3} onClick={onClose}>
 					Cancel
 				</Button>

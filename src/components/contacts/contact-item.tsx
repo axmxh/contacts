@@ -73,7 +73,14 @@ const ContactItem = ({
 					active={active}
 				/>
 			</Modal>
-			<Tr cursor="pointer" onClick={handleRowClick}>
+			<Tr
+				_hover={{
+					background: 'gray.100'
+				}}
+				cursor="pointer"
+				onClick={handleRowClick}
+				data-testid="contact-item"
+			>
 				<Td paddingBlock="2">
 					<HStack borderInlineEnd="1px solid #E7E3E3">
 						<Box position="relative">
