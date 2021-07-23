@@ -5,10 +5,12 @@ import {
 	Td,
 	Text,
 	Tr,
-	useDisclosure
+	useDisclosure,
+	useToast
 } from '@chakra-ui/react';
 import React from 'react';
 import { Dot } from '../../assets/svgs';
+import { formatContact, random } from '../../data/contacts';
 import { updateUser } from '../../services/contacts';
 import Modal from '../modal';
 import ContactForm from './contact-form';
@@ -23,17 +25,6 @@ interface Props {
 	id: number;
 }
 
-const jobs = [
-	'Frontend Engineer',
-	'Backend Engineer',
-	'QA Engineer',
-	'Product Manger',
-	'CEO',
-	'CTO'
-];
-const contributions = [454545, 525989, 9893565, 5465464, 646464, 636666];
-const random = () => Math.floor(Math.random() * jobs.length);
-
 const ContactItem = ({
 	firstName,
 	lastName,
@@ -43,6 +34,7 @@ const ContactItem = ({
 	id
 }: Props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const toast = useToast();
 
 	const handleRowClick = () => {
 		onOpen();
@@ -50,29 +42,16 @@ const ContactItem = ({
 
 	const onFormSubmit = (e: any) => {
 		e.preventDefault();
-		const firstName = e.target.elements['firstName'].value;
-		const lastName = e.target.elements['lastName'].value;
-		const email = e.target.elements['email'].value;
-		const gender: any = Array.from(e.target.elements).find(
-			(element: any) => element.type === 'radio' && element.checked
-		);
-		const department = e.target.elements['department'].value;
-		const contribution = e.target.elements['contribution'].value;
-		const active: any = Array.from(e.target.elements).find(
-			(element: any) => element.type === 'checkbox'
-		);
-		const data = {
-			name: `${firstName} ${lastName}`,
-			job: 'zion resident',
-			email,
-			gender,
-			contribution,
-			active,
-			department
-		};
-
+		const data = formatContact(e);
 		updateUser(id, data).then((res) => {
 			onClose();
+			toast({
+				title: 'Contact updated.',
+				status: 'success',
+				duration: 3000,
+				position: 'top-right',
+				isClosable: true
+			});
 		});
 	};
 	return (
@@ -90,7 +69,7 @@ const ContactItem = ({
 					lastName={lastName}
 					gender="male"
 					email={email}
-					contribution={contributions[random()]}
+					contribution={random('contribution')}
 					active={active}
 				/>
 			</Modal>
@@ -112,7 +91,7 @@ const ContactItem = ({
 				</Td>
 				<Td paddingBlock="2">
 					<Text lineHeight="36px" borderInlineEnd="1px solid #E7E3E3">
-						{jobs[random()]}
+						{random('job')}
 					</Text>
 				</Td>
 				<Td paddingBlock="2">
@@ -120,7 +99,7 @@ const ContactItem = ({
 						{email}
 					</Text>
 				</Td>
-				<Td>{contributions[random()]}</Td>
+				<Td>{random('contribution')}</Td>
 			</Tr>
 		</>
 	);

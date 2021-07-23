@@ -3,11 +3,15 @@ import React, { ReactElement } from 'react';
 import Logo from '../assets/imgs/logo.png';
 import { Link } from 'react-router-dom';
 import { Setting, User } from '../assets/svgs';
+import { useLocation } from 'react-router-dom';
 interface Props {
 	isOpen: boolean;
 }
 
 function Sidebar({ isOpen }: Props): ReactElement {
+	const { pathname } = useLocation();
+	console.log('router', pathname);
+
 	return (
 		<Stack
 			position="fixed"
@@ -28,13 +32,25 @@ function Sidebar({ isOpen }: Props): ReactElement {
 
 			<Box py="5">
 				<Link to="/contacts">
-					<Flex alignItems="center" color="white" py="2" px="5">
+					<Flex
+						alignItems="center"
+						color="white"
+						py="2"
+						px="5"
+						backgroundColor={pathname === '/contacts' ? '#233456' : ''}
+					>
 						<User />
 						<Text ps="2">Contacts</Text>
 					</Flex>
 				</Link>
 				<Link to="/">
-					<Flex alignItems="center" color="white" py="2" px="5">
+					<Flex
+						backgroundColor={pathname === '/' ? '#233456' : ''}
+						alignItems="center"
+						color="white"
+						py="2"
+						px="5"
+					>
 						<Setting />
 						<Text ps="2">Setting</Text>
 					</Flex>

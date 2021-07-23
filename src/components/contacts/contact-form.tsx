@@ -20,7 +20,7 @@ interface Props {
 	lastName?: string;
 	gender?: string;
 	email?: string;
-	contribution?: number;
+	contribution?: number | string;
 	active?: boolean;
 }
 
@@ -35,8 +35,7 @@ const ContactForm = ({
 	active
 }: Props) => {
 	const [value, setValue] = useState('male');
-	const [checked, setChecked] = useState(active);
-	console.log('---c', value, checked);
+	const [_, setChecked] = useState(active);
 
 	return (
 		<form onSubmit={onFormSubmit}>

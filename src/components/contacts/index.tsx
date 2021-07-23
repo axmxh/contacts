@@ -8,9 +8,12 @@ import {
 	InputLeftElement,
 	Table,
 	Tbody,
-	useDisclosure
+	useDisclosure,
+	useToast
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+
+import { formatContact } from '../../data/contacts';
 import { createUser, getUsers } from '../../services/contacts';
 import Modal from '../modal';
 import ContactForm from './contact-form';
@@ -20,7 +23,7 @@ interface Props {}
 
 const Contacts = (props: Props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-
+	const toast = useToast();
 	const [contacts, setContacts] = useState([]);
 	const [query, setQuery] = useState('');
 
@@ -35,29 +38,16 @@ const Contacts = (props: Props) => {
 
 	const onFormSubmit = (e: any) => {
 		e.preventDefault();
-		const firstName = e.target.elements['firstName'].value;
-		const lastName = e.target.elements['lastName'].value;
-		const email = e.target.elements['email'].value;
-		const gender: any = Array.from(e.target.elements).find(
-			(element: any) => element.type === 'radio' && element.checked
-		);
-		const department = e.target.elements['department'].value;
-		const contribution = e.target.elements['contribution'].value;
-		const active: any = Array.from(e.target.elements).find(
-			(element: any) => element.type === 'checkbox'
-		);
-		const data = {
-			name: `${firstName} ${lastName}`,
-			job: 'zion resident',
-			email,
-			gender,
-			contribution,
-			active,
-			department
-		};
-
+		const data = formatContact(e);
 		createUser(data).then((res) => {
 			onClose();
+			toast({
+				title: 'Contact created.',
+				status: 'success',
+				duration: 3000,
+				position: 'top-right',
+				isClosable: true
+			});
 		});
 	};
 
@@ -97,7 +87,7 @@ const Contacts = (props: Props) => {
 						type="text"
 					/>
 				</InputGroup>
-				<Button onClick={onOpen} variant="outline">
+				<Button fontWeight="light" onClick={onOpen} variant="outline">
 					Add
 				</Button>
 			</HStack>
