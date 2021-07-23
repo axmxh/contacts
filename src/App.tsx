@@ -13,11 +13,9 @@ function App() {
 					<Layout>
 						<Switch>
 							<Route exact path="/">
-								Setting
-							</Route>
-							<Route path="/contacts">
 								<Contacts />
 							</Route>
+							<Route path="/setting">Setting</Route>
 						</Switch>
 					</Layout>
 				</div>

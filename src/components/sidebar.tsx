@@ -30,21 +30,21 @@ function Sidebar({ isOpen }: Props): ReactElement {
 			</Center>
 
 			<Box py="5">
-				<Link to="/contacts">
+				<Link to="/">
 					<Flex
 						alignItems="center"
 						color="white"
 						py="2"
 						px="5"
-						backgroundColor={pathname === '/contacts' ? '#233456' : ''}
+						backgroundColor={pathname === '/' ? '#233456' : ''}
 					>
 						<User />
 						<Text ps="2">Contacts</Text>
 					</Flex>
 				</Link>
-				<Link to="/">
+				<Link to="/setting">
 					<Flex
-						backgroundColor={pathname === '/' ? '#233456' : ''}
+						backgroundColor={pathname === '/setting' ? '#233456' : ''}
 						alignItems="center"
 						color="white"
 						py="2"
