@@ -5,10 +5,11 @@ import {
 	FormLabel,
 	HStack,
 	Input,
+	Select,
 	InputGroup,
 	Radio,
 	RadioGroup,
-	Stack,
+	Stack
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
@@ -31,7 +32,7 @@ const ContactForm = ({
 	gender,
 	email,
 	contribution,
-	active,
+	active
 }: Props) => {
 	const [value, setValue] = useState('male');
 	const [checked, setChecked] = useState(active);
@@ -40,21 +41,17 @@ const ContactForm = ({
 	return (
 		<form onSubmit={onFormSubmit}>
 			<HStack>
-				<FormControl
-					// isInvalid={!!errors?.password?.message}
-					// errortext={errors?.password?.message}
-					pb="5"
-				>
+				<FormControl pb="5">
 					<FormLabel m="0">First Name:</FormLabel>
 					<InputGroup>
 						<Input
 							type="text"
 							name="firstName"
+							required={true}
 							defaultValue={firstName}
 							placeholder="First Name"
 						/>
 					</InputGroup>
-					{/* <FormErrorMessage m="0">{errors?.password?.message}</FormErrorMessage> */}
 				</FormControl>
 				<FormControl pb="5">
 					<FormLabel m="0">Last Name:</FormLabel>
@@ -90,21 +87,25 @@ const ContactForm = ({
 					<InputGroup>
 						<Input
 							name="email"
+							required={true}
 							defaultValue={email}
 							type="email"
 							placeholder="Email"
 						/>
 					</InputGroup>
-					{/* <FormErrorMessage m="0">{errors?.password?.message}</FormErrorMessage> */}
 				</FormControl>
 			</HStack>
 			<HStack>
 				<FormControl pb="5">
-					<FormLabel m="0">Departure:</FormLabel>
+					<FormLabel m="0">Department:</FormLabel>
 					<InputGroup>
-						<Input type="text" placeholder="Departure" />
+						<Select name="department" placeholder="Select option">
+							<option value="marketing">Marketing</option>
+							<option value="sales">Sales</option>
+							<option value="it">IT</option>
+							<option value="support">Support</option>
+						</Select>
 					</InputGroup>
-					{/* <FormErrorMessage m="0">{errors?.password?.message}</FormErrorMessage> */}
 				</FormControl>
 				<FormControl pb="5">
 					<FormLabel m="0">Contribution:</FormLabel>
@@ -116,12 +117,10 @@ const ContactForm = ({
 							placeholder="Contribution"
 						/>
 					</InputGroup>
-					{/* <FormErrorMessage m="0">{errors?.password?.message}</FormErrorMessage> */}
 				</FormControl>
 			</HStack>
 			<HStack>
 				<Checkbox
-					// isNative
 					name="active"
 					onChange={() => setChecked((prev) => !prev)}
 					checked={active}

@@ -4,7 +4,7 @@ import {
 	ModalCloseButton,
 	ModalContent,
 	ModalHeader,
-	ModalOverlay,
+	ModalOverlay
 } from '@chakra-ui/react';
 import React, { ReactElement, ReactNode } from 'react';
 
@@ -16,7 +16,6 @@ interface Props {
 	isOpen: boolean;
 	onOpen: () => void;
 	onClose: () => void;
-	onSubmit?: (e: any) => void;
 }
 
 function Modal({
@@ -24,7 +23,7 @@ function Modal({
 	title,
 	isOpen,
 	onClose,
-	size = 'md',
+	size = 'md'
 }: Props): ReactElement {
 	return (
 		<ChakraModal

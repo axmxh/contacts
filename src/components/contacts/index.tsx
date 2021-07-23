@@ -8,7 +8,7 @@ import {
 	InputLeftElement,
 	Table,
 	Tbody,
-	useDisclosure,
+	useDisclosure
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { createUser, getUsers } from '../../services/contacts';
@@ -26,49 +26,39 @@ const Contacts = (props: Props) => {
 
 	const fetchUsers = () => {
 		getUsers().then((res: any) => {
-			// console.log('res', res);
 			setContacts(res.data);
 		});
 	};
 	useEffect(() => {
 		fetchUsers();
 	}, []);
-	// console.log(contacts);
 
 	const onFormSubmit = (e: any) => {
 		e.preventDefault();
-		const firstName = e.target.elements['firstName'];
-		const lastName = e.target.elements['lastName'];
-		const email = e.target.elements['email'];
+		const firstName = e.target.elements['firstName'].value;
+		const lastName = e.target.elements['lastName'].value;
+		const email = e.target.elements['email'].value;
 		const gender: any = Array.from(e.target.elements).find(
 			(element: any) => element.type === 'radio' && element.checked
 		);
-
-		const contribution = e.target.elements['contribution'];
+		const department = e.target.elements['department'].value;
+		const contribution = e.target.elements['contribution'].value;
 		const active: any = Array.from(e.target.elements).find(
 			(element: any) => element.type === 'checkbox'
 		);
 		const data = {
-			name: `${firstName.value} ${lastName.value}`,
+			name: `${firstName} ${lastName}`,
 			job: 'zion resident',
-			email: email.value,
-			contribution: contribution.value,
-			gender: gender.value,
-			active: active.checked,
+			email,
+			gender,
+			contribution,
+			active,
+			department
 		};
+
 		createUser(data).then((res) => {
-			// console.log('res', res);
 			onClose();
 		});
-		console.log(
-			'form',
-			firstName.value,
-			lastName.value,
-			email.value,
-			contribution.value,
-			gender.value,
-			active.checked
-		);
 	};
 
 	const search = (e: any) => {
@@ -78,7 +68,6 @@ const Contacts = (props: Props) => {
 			const results = contacts.filter((contact) =>
 				JSON.stringify(contact).toLowerCase().includes(word.toLowerCase())
 			);
-			console.log('res', results, word);
 			setContacts(results);
 		} else if (word === '') {
 			fetchUsers();
@@ -93,16 +82,7 @@ const Contacts = (props: Props) => {
 				onOpen={onOpen}
 				isOpen={isOpen}
 			>
-				<ContactForm
-					onClose={onClose}
-					onFormSubmit={onFormSubmit}
-					// firstName={firstName}
-					// lastName={lastName}
-					// gender="other"
-					// email={email}
-					// contribution={contribution}
-					// active={active}
-				/>
+				<ContactForm onClose={onClose} onFormSubmit={onFormSubmit} />
 			</Modal>
 			<HStack>
 				<InputGroup>
