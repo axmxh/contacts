@@ -9,7 +9,7 @@
 
 ### `yarn`
 
-to install all project dependencies.\
+to install all project dependencies.
 
 ### `yarn start`
 
